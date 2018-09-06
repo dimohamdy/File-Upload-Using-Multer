@@ -28,6 +28,7 @@ app.use(session({
 
 // routes ======================================================================
 app.use('/user', userRoutes);
+app.use('/images/', express.static(__dirname + '/public/images/uploads'));
 
 // launch ======================================================================
 app.listen(port);
