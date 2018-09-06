@@ -11,7 +11,7 @@ Source code of the blog post.
   write `mongo` then `use myproject`
 - Navigate to the root directory
 - `npm install` to install project dependencies
-- `nodemon` to run the app
+- `nodemon server.js` to run the app `node server.js`
 
 ## Server Side File Structure
 ```bash
