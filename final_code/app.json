@@ -1,0 +1,8 @@
+{
+  "name": "Gallry",
+  "description": "Spark networks Gallary",
+  "repository": "https://github.com/dimohamdy/File-Upload-Using-Multer",
+  "logo": "https://rawgit.com/heroku/node-js-sample/master/public/node.svg",
+  "keywords": ["node", "express", "static"],
+  "image": "heroku/nodejs"
+}

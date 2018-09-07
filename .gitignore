@@ -18,7 +18,7 @@ config/database.js
 config/auth.js
 
 
-public/images/uploads
+final_code/public/images/uploads
 
 
 .idea/workspace.xml
