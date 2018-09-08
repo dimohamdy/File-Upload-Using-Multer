@@ -4,6 +4,7 @@ var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var url = process.env.MONGOLAB_URI;
 const path = require('path');
+var fs = require('fs');
 
 var multer = require('multer');
 var storage = multer.diskStorage({
