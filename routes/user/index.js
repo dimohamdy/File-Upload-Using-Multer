@@ -2,12 +2,18 @@ var express = require('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
-var url = 'mongodb://localhost:27017/myproject';
+var url = process.env.MONGOLAB_URI;
 const path = require('path');
+var fs = require('fs');
 
 var multer = require('multer');
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
+      try {
+  fs.mkdirSync(path.join(__dirname, '/public/images/uploads/'))
+} catch (err) {
+console.log(err);
+}
       cb(null, 'public/images/uploads')
     },
     filename: (req, file, cb) => {
@@ -17,6 +23,7 @@ var storage = multer.diskStorage({
 var upload = multer({storage: storage});
 
 router.post('/fileUpload', upload.single('image'), (req, res, next) => {
+   console.log("open database");
     MongoClient.connect(url, (err, db) => {
         assert.equal(null, err);
         var filePath = '/images/' + req.file.filename /*+  path.extname(req.file.originalname)*/;
