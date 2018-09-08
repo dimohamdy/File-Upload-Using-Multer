@@ -17,6 +17,7 @@ var storage = multer.diskStorage({
 var upload = multer({storage: storage});
 
 router.post('/fileUpload', upload.single('image'), (req, res, next) => {
+   console.log("open database");
     MongoClient.connect(url, (err, db) => {
         assert.equal(null, err);
         var filePath = '/images/' + req.file.filename /*+  path.extname(req.file.originalname)*/;
