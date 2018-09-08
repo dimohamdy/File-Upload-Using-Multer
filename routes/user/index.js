@@ -8,6 +8,11 @@ const path = require('path');
 var multer = require('multer');
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
+      try {
+  fs.mkdirSync(path.join(__dirname, '/public/images/uploads/'))
+} catch (err) {
+  if (err.code !== 'EEXIST') throw err
+}
       cb(null, 'public/images/uploads')
     },
     filename: (req, file, cb) => {
