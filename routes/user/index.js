@@ -12,7 +12,7 @@ var storage = multer.diskStorage({
       try {
   fs.mkdirSync(path.join(__dirname, '/public/images/uploads/'))
 } catch (err) {
-  if (err.code !== 'EEXIST') throw err
+console.log(err);
 }
       cb(null, 'public/images/uploads')
     },
