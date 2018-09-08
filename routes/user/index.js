@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
-var url = 'mongodb://localhost:27017/myproject';
+var url = 'mongodb://dimo.hamdy:<Dragonball2z@ds249372.mlab.com:49372/myproject';
 const path = require('path');
 
 var multer = require('multer');
