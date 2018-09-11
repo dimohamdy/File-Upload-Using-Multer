@@ -3,6 +3,7 @@ var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var url = process.env.MONGOLAB_URI;
+// var url = 'mongodb://localhost:27017/myproject';
 const path = require('path');
 var fs = require('fs');
 const aws = require('aws-sdk');
@@ -33,11 +34,6 @@ const S3_BUCKET = process.env.S3_BUCKET || "gallaryspark";
 
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      /*try {
-  fs.mkdirSync(path.join(__dirname, '/public/images/uploads/'))
-} catch (err) {
-console.log(err);
-}*/
       cb(null, 'public/images/uploads')
     },
     filename: (req, file, cb) => {
@@ -61,8 +57,8 @@ console.log("path  " + filePath);
   fs.readFile(filePath, function (err, data) {
 
        if (!err) {
-         console.log("File readed");
-         console.log("data");
+         // console.log("File readed");
+         // console.log("data");
          const s3Params = {
            Bucket: S3_BUCKET,
            Key: req.file.filename,
@@ -78,12 +74,14 @@ console.log("path  " + filePath);
            console.log(err);
           }
           console.log('success');
-          console.log(data);
+          // console.log(data);
           console.log(data.Location);
-          MongoClient.connect(url, (err, db) => {
+          MongoClient.connect(url,{ useNewUrlParser: true }, (err, db) => {
+            let database = db.db('myproject');
                 assert.equal(null, err);
-                insertDocuments(db, data.Location, (result) => {
+                insertDocuments(database, data.Location, (result) => {
                     db.close();
+                    console.log(result);
                     res.json(result);
                 });
             });
@@ -99,9 +97,10 @@ console.log("path  " + filePath);
 
 
 router.get('/files', function (req, res) {
-  MongoClient.connect(url, (err, db) => {
+  MongoClient.connect(url,{ useNewUrlParser: true }, (err, db) => {
+    let database = db.db('myproject');
       assert.equal(null, err);
-      getDocuments(db, (result) => {
+      getDocuments(database, (result) => {
           db.close();
           res.json(result);
       });
@@ -126,7 +125,7 @@ var insertDocuments = function(db, filePath, callback) {
  }
     });
 
-    collection.all
+    // collection.all
 };
 
 
