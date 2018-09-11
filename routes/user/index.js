@@ -34,6 +34,11 @@ const S3_BUCKET = process.env.S3_BUCKET || "gallaryspark";
 
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
+      try {
+  fs.mkdirSync(path.join(__dirname, '/public/images/uploads/'))
+} catch (err) {
+console.log(err);
+}
       cb(null, 'public/images/uploads')
     },
     filename: (req, file, cb) => {
